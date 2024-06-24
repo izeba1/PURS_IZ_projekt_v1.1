@@ -1,0 +1,1 @@
+SELECT vrijednost FROM co_vrijednost ORDER BY id DESC LIMIT 1

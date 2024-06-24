@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{naslov}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}"/>
+</head>
+<body>
+    <div class="glavni">
+        <header>
+            <div class="user">
+                <p>{{username}}</p>
+                <img src="{{ url_for('static', filename='user-icon.png') }}" alt="User slika" width="50px">
+            </div>
+            <img class="ikona" src="{{ url_for('static', filename='icon.png') }}" alt="Ikona stranice" width="50px">
+        </header>
+        <nav>
+            <a href="{{url_for('logout')}}">Logout</a>
+            <a href="?id=1">Početna stranica</a>
+            <a href="?id=2">Korisnici</a>
+        </nav>
+        <main>
+            {%if d==1%}
+            <div class="scrollable-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Vrijeme</th>
+                            <th>Vrijednost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for d in data%}
+                        <tr>
+                            <td>{{d[1]}}</td>
+                            <td>{{d[2]}}</td>
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div class="unos">
+                <label>Trenutna vrijednost:</label>
+                <br>
+                <span id="data"></span>
+            </div>
+            <script src="{{ url_for('static', filename='gas_value.js') }}"></script>
+            <div class="unos">
+                <label>Granična vrijednost CO:</label>
+                <br>
+                <form action="/zadana_vrijednost" method="POST">
+                    <input type="number" min="100" name="zadana_vrijednost" placeholder="Unesite vrijednost CO" required>
+                    <button>Unesi</button>
+                </form>
+            </div>
+            <div class="unos_2">
+                <label>Način rada ventilacije:</label>
+                <button>Automatski</button>
+                <button>1. brzina</button>
+                <button>2. brzina</button>
+                <button>3. brzina</button>
+            </div>
+        
+            {%elif d==2%}
+            <div class="scrollable-table">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Ime</th>
+                            <th>Prezime</th>
+                            <th>Username</th>
+                            <th>ID ovlasti</th>
+                            {% if ovlasti == 1 %}
+                            <th>Obriši</th>
+                            {% endif %} 
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {%for d in data%}
+                        <tr>
+                            <td>{{d[0]}}</td>
+                            <td>{{d[1]}}</td>
+                            <td>{{d[2]}}</td>
+                            <td>{{d[3]}}</td>
+                            <td>{{d[4]}}</td>
+                            {% if ovlasti == 1 %}
+                            <td>
+                                <form method="POST" action="/obrisi_korisnika">
+                                    <input type="hidden" name="id" value="{{ d[0] }}">
+                                    <button>Obriši</button> 
+                                </form>
+                            </td>
+                            {% endif %} 
+                        </tr>
+                        {%endfor%}
+                    </tbody>
+                </table>
+            </div>
+            <div class="unos_3">
+                <label>Unos novih korisnika:</label>
+                <br>
+                <form action="/dodaj_korisnika" method="POST">
+                    <input type="text" name="ime" placeholder="Ime" required>
+                    <input type="text" name="prezime" placeholder="Prezime" required>
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" minlength="4" maxlength="10" name="password" placeholder="Password" required>
+                    <input type="number" min="1" max="2" name="ovlast" placeholder="Ovlast" required>
+                    <button>Unesi</button>
+                </form>
+            </div>
+            {%endif%}
+        </main>
+    </div>
+</body>
+</html>

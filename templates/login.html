@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{naslov}}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles_login.css') }}"/>
+</head>
+<body>
+    <div class= "glavni">
+        <header>
+            <div class="user">
+                <p>Prijava korisnika</p>
+                <img src="{{ url_for('static', filename='user-icon.png') }}" alt="User slika" width="50px">
+            </div>
+            <img class="ikona" src="{{ url_for('static', filename='icon.png') }}" alt="Ikona stranice" width="50px">
+        </header>
+        <nav>
+            <p></p>
+        </nav>
+        <main>
+            <div class="login-form">
+                <form action="/login" method="POST">
+                    {% if poruka %}
+                    <p>{{poruka}}</p>
+                    {% endif %}
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="password" minlength="4" name="password" placeholder="Password" required>
+                    <button>Login</button>
+                </form>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

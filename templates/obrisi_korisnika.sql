@@ -1,0 +1,1 @@
+DELETE FROM korisnik WHERE id = '{{id}}';

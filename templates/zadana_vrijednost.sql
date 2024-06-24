@@ -1,0 +1,1 @@
+INSERT INTO co_vrijednost (vrijednost) VALUES ("{{vrijednost}}");

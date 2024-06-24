@@ -1,0 +1,1 @@
+INSERT INTO co_vrijednost (datum, vrijednost) VALUES (NOW(), "{{vrijednost}}");
