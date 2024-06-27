@@ -73,7 +73,7 @@ def put_co_vrijednosti():
     if co_vrijednost:
         zadana_vrijednost = int(co_vrijednost)
         # Spremanje u tablicu zadana_vrijednost za nadogradnju projekta
-        g.cursor.execute(render_template('zadana_vrijednost.sql', vrijednost=co_vrijednost)) 
+        g.cursor.execute(render_template('zadana_vrijednost.sql', vrijednost = zadana_vrijednost)) 
         return redirect('/?id=1')
 
 

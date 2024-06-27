@@ -4,7 +4,7 @@
 #include <ArduinoJson.h>
 
 //IP adresa servera
-const char *serverName = "http://192.168.183.138:80/gas_sens";
+const char *serverName = "http://192.168.252.137:80/gas_sens";
 HTTPClient http;
 
 //SSID i PASS za WiFi
@@ -39,7 +39,7 @@ void loop() {
   int reading = analogRead(GAS);
   //Serial.println(reading);
 
-  if (reading > 200) {
+  if (reading > 500) {
     digitalWrite(LED_C, HIGH);
     digitalWrite(LED_Z, LOW);
   } else {

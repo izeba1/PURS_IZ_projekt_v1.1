@@ -1,1 +1,1 @@
-INSERT INTO co_vrijednost (vrijednost) VALUES ("{{vrijednost}}");
+INSERT INTO zadana_vrijednost (vrijednost) VALUES ("{{vrijednost}}");
